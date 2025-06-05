@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impacto de la Transformación Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Intro: Global TD Market CAGR (Dynamic Text/Chart.js Line) - Goal: Inform - Interaction: Static display - Justification: Highlights scale - Method: JS + Chart.js.
+        - Operacional: Automation impact stats (Dynamic Text/Chart.js Bar) - Goal: Inform/Compare - Interaction: Static display - Justification: Quantifies efficiency - Method: JS + Chart.js.
+        - Humano/Cultural: Barreras en Perú (Chart.js Bar Chart) - Goal: Inform/Compare - Interaction: Hover for details - Justification: Highlights specific challenges - Method: Chart.js.
+        - Mercado: CX improvement stats (Dynamic Text), Data monetization examples (Text block) - Goal: Inform - Justification: Shows market-facing impact - Method: JS + HTML.
+        - Desafíos: Cybersecurity stats (Dynamic Text), Cost factors (List) - Goal: Inform - Justification: Outlines risks - Method: JS + HTML.
+        - Sostenibilidad: ODS connection (Text), Green IT benefits (List) - Goal: Inform - Justification: Shows broader impact - Method: HTML.
+        - Frameworks (TOE, Capacidades Dinámicas): Concise text explanations. Goal: Explain - Justification: Provides theoretical context. Method: HTML.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .nav-button {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .nav-button.active {
+            background-color: #0D9488; /* teal-600 */
+            color: white;
+        }
+        .nav-button:hover:not(.active) {
+            background-color: #CCFBF1; /* teal-100 */
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* max-w-2xl */
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px; /* h-80 */
+            max-height: 400px;
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .chart-container {
+                height: 384px; /* h-96 */
+            }
+        }
+        /* Tailwind default font stack includes Inter */
+         h1, h2, h3 { color: #1e293b; } /* slate-800 */
+         p, li { color: #334155; } /* slate-700 */
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between py-4">
+                <h1 class="text-2xl sm:text-3xl font-bold text-teal-700 mb-2 sm:mb-0">Impacto de la Transformación Digital</h1>
+                <nav class="flex flex-wrap justify-center sm:justify-end space-x-1 sm:space-x-2">
+                    <button data-target="inicio" class="nav-button active text-xs sm:text-sm px-3 py-2 rounded-md font-medium">Inicio</button>
+                    <button data-target="operacional" class="nav-button text-xs sm:text-sm px-3 py-2 rounded-md font-medium">Operacional</button>
+                    <button data-target="humano" class="nav-button text-xs sm:text-sm px-3 py-2 rounded-md font-medium">Humano/Cultural</button>
+                    <button data-target="mercado" class="nav-button text-xs sm:text-sm px-3 py-2 rounded-md font-medium">Mercado</button>
+                    <button data-target="desafios" class="nav-button text-xs sm:text-sm px-3 py-2 rounded-md font-medium">Desafíos</button>
+                    <button data-target="sostenibilidad" class="nav-button text-xs sm:text-sm px-3 py-2 rounded-md font-medium">Sostenibilidad</button>
+                    <button data-target="conclusion" class="nav-button text-xs sm:text-sm px-3 py-2 rounded-md font-medium">Conclusión</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div id="inicio" class="content-section active">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4 text-teal-600">Comprendiendo la Transformación Digital</h2>
+                <p class="mb-4">La transformación digital (TD) es un imperativo estratégico global que reconfigura cómo las organizaciones operan y compiten. Este fenómeno va más allá de la simple adopción tecnológica, implicando una reinvención fundamental de la experiencia del cliente, modelos de negocio y operaciones internas para generar nuevo valor y optimizar la eficiencia.</p>
+                <p class="mb-6">Este espacio interactivo explora las múltiples dimensiones del impacto de la TD, desde los cambios operacionales y culturales hasta su influencia en el mercado, los desafíos inherentes y su contribución a la sostenibilidad.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-teal-50 p-6 rounded-lg text-center">
+                        <h3 class="text-xl font-semibold text-teal-700 mb-2">Mercado Global de TD</h3>
+                        <p class="text-3xl font-bold text-teal-600">$1.70 Billones</p>
+                        <p class="text-sm text-slate-600">Valor en 2024</p>
+                        <p class="text-3xl font-bold text-teal-600 mt-4">$4.46 Billones</p>
+                        <p class="text-sm text-slate-600">Proyección para 2029</p>
+                        <p class="text-lg font-semibold text-teal-600 mt-4">21.32% CAGR</p>
+                         <p class="text-sm text-slate-600">(2024-2029)</p>
+                    </div>
+                    <div class="bg-sky-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-sky-700 mb-3">Crecimiento Proyectado del Mercado de TD</h3>
+                         <div class="chart-container h-64 md:h-72">
+                            <canvas id="tdMarketChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center mt-2 text-slate-500">Visualización del crecimiento estimado del mercado global de transformación digital.</p>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600">La TD no es solo una actualización tecnológica; es una metamorfosis que impacta la estrategia, cultura, estructura y relaciones de la empresa, redefiniendo su identidad y propósito.</p>
+            </div>
+        </div>
+
+        <div id="operacional" class="content-section">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4 text-teal-600">Impacto Operacional y Estructural</h2>
+                <p class="mb-6">La TD cataliza cambios profundos en la arquitectura operacional y estructural, resultando en mejoras significativas de eficiencia, la emergencia de nuevos modelos de negocio y una mayor agilidad organizacional. Su objetivo es optimizar flujos, reducir tiempos y mejorar la calidad productiva.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-indigo-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-indigo-700 mb-3">Eficiencia y Productividad por Automatización</h3>
+                        <ul class="space-y-3 text-slate-700">
+                            <li><span class="font-semibold text-indigo-600">25%</span> de tareas laborales podrían reemplazarse para 2030.</li>
+                            <li><span class="font-semibold text-indigo-600">20-30%</span> mejora potencial en márgenes operativos.</li>
+                            <li><span class="font-semibold text-indigo-600">30%</span> aumento promedio en eficiencia operativa reportado.</li>
+                            <li><span class="font-semibold text-indigo-600">30%</span> impulso a la eficiencia en manufactura con IA.</li>
+                        </ul>
+                         <p class="text-xs text-slate-500 mt-4">La automatización libera capital humano para tareas estratégicas y creativas, redirigiendo recursos hacia la innovación y el desarrollo.</p>
+                    </div>
+                     <div class="bg-amber-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-amber-700 mb-3">Automatización en Restaurantes</h3>
+                        <div class="chart-container h-64 md:h-72">
+                            <canvas id="restaurantAutomationChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center mt-2 text-slate-500">Un 65% de restaurantes ya han implementado soluciones de automatización.</p>
+                    </div>
+                </div>
+
+                <div class="mb-6 bg-slate-50 p-4 rounded-md">
+                    <h3 class="text-lg font-semibold mb-2 text-slate-700">Nuevos Modelos de Negocio</h3>
+                    <p class="mb-2">La TD es una "reinvención fundamental" que impulsa la exploración de formas inéditas de entregar valor y generar ingresos. Permite transformar datos en activos estratégicos para desarrollar productos y servicios disruptivos.</p>
+                    <p class="text-sm font-medium text-teal-600">Ejemplo: Wu Restaurantes en Perú, con su ambición de ser una "empresa tecnológica", diversificó canales de venta con apps propias, redefiniendo su modelo operativo.</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-md">
+                    <h3 class="text-lg font-semibold mb-2 text-slate-700">Agilidad y Nuevos Modelos de Trabajo</h3>
+                    <p class="mb-2">La TD incrementa la agilidad y adaptabilidad, permitiendo a las empresas anticipar desafíos. Ha impulsado el teletrabajo y el uso de herramientas colaborativas.</p>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        <li><span class="font-semibold">98%</span> de empleados remotos desean mantener esta modalidad parcialmente.</li>
+                        <li><span class="font-semibold">74%</span> de empresas planean adoptar un modelo híbrido permanentemente.</li>
+                    </ul>
+                </div>
+                <div class="mt-6 bg-gray-100 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Marco TOE (Tecnología-Organización-Entorno)</h3>
+                    <p class="text-sm text-gray-600 mb-1">Este marco analiza cómo la interacción de factores tecnológicos (infraestructura, capacidades de TI), organizacionales (estrategia, estructura, liderazgo) y del entorno (digitalización industrial, apoyo gubernamental) moldea el impacto de la TD.</p>
+                    <p class="text-sm text-gray-600 font-medium">La tecnología por sí sola es insuficiente; su potencial se materializa con una estrategia, estructura y liderazgo coherentes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="humano" class="content-section">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4 text-teal-600">Impacto Humano y Cultural</h2>
+                <p class="mb-6">El impacto más profundo y desafiante de la TD se manifiesta en las dimensiones humana y cultural. El éxito depende de fomentar una cultura receptiva, desarrollar competencias digitales y contar con un liderazgo transformador.</p>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-rose-50 p-6 rounded-lg">
+                         <h3 class="text-xl font-semibold text-rose-700 mb-3">Barreras Humanas y Culturales en Perú</h3>
+                        <div class="chart-container">
+                            <canvas id="barrerasPeruChart"></canvas>
+                        </div>
+                        <p class="text-xs text-center mt-2 text-slate-500">Porcentaje de ejecutivos peruanos que identifican estas barreras (Estudios PwC/EY).</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-slate-700 mb-3">El Factor Humano</h3>
+                        <p class="mb-2 text-sm">La cultura organizacional es el cimiento. En Perú, el 65% de ejecutivos ve la falta de habilidades digitales y la cultura tradicional como desafíos clave (PwC).</p>
+                        <p class="mb-2 text-sm">Es necesario "revolucionar el ADN de la empresa", fomentando una cultura colaborativa y abierta al aprendizaje.</p>
+                        <h4 class="font-semibold mt-4 mb-1 text-slate-600">Brecha de Habilidades:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>62% de ejecutivos (EY Perú) considera que sus empresas carecen de personal capacitado.</li>
+                            <li>65% (EY Perú) indica que no poseen las competencias digitales necesarias.</li>
+                        </ul>
+                         <p class="text-xs text-slate-500 mt-3">La TD transforma la naturaleza del trabajo, exigiendo pensamiento crítico, adaptabilidad y aprendizaje continuo.</p>
+                    </div>
+                </div>
+                
+                <div class="mb-6 bg-sky-50 p-4 rounded-md">
+                    <h3 class="text-lg font-semibold mb-2 text-sky-700">Liderazgo Digital</h3>
+                    <p class="mb-2 text-sm">Los líderes digitales articulan una visión clara y ejecutan estrategias para materializarla. Deben inspirar confianza, demostrar agilidad, empatía y fluidez digital.</p>
+                    <p class="text-sm font-medium"><span class="font-bold text-sky-600">73%</span> de empresas digitalmente maduras reportan alta confianza en sus líderes.</p>
+                </div>
+
+                <div class="bg-red-50 p-4 rounded-md">
+                    <h3 class="text-lg font-semibold mb-2 text-red-700">Resistencia al Cambio</h3>
+                    <p class="mb-2 text-sm">Es un desafío crítico. Aproximadamente el <span class="font-bold">70%</span> de iniciativas de TD fracasan por falta de compromiso y resistencia al cambio.</p>
+                    <p class="mb-2 text-sm">Superarla requiere comunicación transparente, involucramiento de empleados, capacitación y una cultura que valore la adaptación.</p>
+                    <p class="text-sm font-medium">Empresas con formación continua tienen <span class="font-bold text-red-600">50%</span> más probabilidad de éxito en adopción tecnológica.</p>
+                    <p class="text-xs text-slate-500 mt-2">El modelo "explorers" y "followers" sugiere que el compromiso activo y estrategias de afrontamiento de los empleados son vitales.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="mercado" class="content-section">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4 text-teal-600">Reconfiguración de la Interfaz Organización-Mercado</h2>
+                <p class="mb-6">La TD redefine cómo las organizaciones interactúan con sus mercados, impactando la experiencia del cliente (CX), el uso de inteligencia de datos y la dinámica competitiva.</p>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-lime-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-lime-700 mb-3">Experiencia del Cliente (CX) Mejorada</h3>
+                        <p class="mb-2 text-sm">La TD permite replantear y enriquecer la CX con personalización en tiempo real, recorridos omnicanal fluidos y análisis predictivo.</p>
+                        <p class="mb-2 text-sm">Se busca habilitar experiencias intuitivas, sin fricciones y satisfactorias mediante automatización, IA y autoservicio.</p>
+                        <p class="text-sm font-medium text-lime-600">Ejemplo: Wu Restaurantes centra su estrategia en el "huésped", indicando un enfoque primordial en la CX.</p>
+                        <p class="text-xs text-slate-500 mt-3">La personalización masiva se está convirtiendo en una expectativa básica.</p>
+                    </div>
+                     <div class="bg-fuchsia-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-fuchsia-700 mb-3">Inteligencia de Datos Estratégica</h3>
+                        <p class="mb-2 text-sm">La TD permite convertir datos en información accionable para generar ingresos y fundamentar decisiones. Los datos se transforman en activos estratégicos.</p>
+                        <p class="mb-2 text-sm">Tecnologías como Big Data e IA impulsan la planificación predictiva y la automatización inteligente.</p>
+                        <p class="text-sm font-medium text-fuchsia-600">Ejemplo: Ransa ha centrado su estrategia en IA y analítica avanzada. Equifax evolucionó a una empresa de data y analytics.</p>
+                         <p class="text-xs text-slate-500 mt-3">La monetización de datos puede generar nuevos flujos de ingresos y transformar la identidad de la empresa.</p>
+                    </div>
+                </div>
+
+                <div class="mb-6 bg-slate-50 p-4 rounded-md">
+                    <h3 class="text-lg font-semibold mb-2 text-slate-700">Impacto en la Dinámica Competitiva</h3>
+                    <p class="mb-2">La TD es un imperativo competitivo. Empresas que la adoptan efectivamente obtienen ventajas significativas y sostenibles, diferenciándose por CX superior, innovación o adaptación ágil de modelos de negocio.</p>
+                    <p class="mb-2 text-sm"><span class="font-semibold">70%</span> de empresas líderes en innovación invierten fuertemente en estas tecnologías.</p>
+                    <p class="text-sm">Sectores con alta intensidad digital son más dinámicos pero pueden concentrar el mercado. Se forman ecosistemas digitales colaborativos.</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Marco de Capacidades Dinámicas</h3>
+                    <p class="text-sm text-gray-600 mb-1">Este concepto refiere a la habilidad de una organización para detectar oportunidades, capturar valor y reconfigurar recursos ágilmente. La TD potencia estas capacidades, promoviendo la innovación abierta y mejor rendimiento.</p>
+                    <p class="text-sm text-gray-600 font-medium">Un meta-impacto de la TD es fortalecer la capacidad de adaptación continua, crucial para la sostenibilidad a largo plazo en un entorno VUCA.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="desafios" class="content-section">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4 text-teal-600">Desafíos Inherentes y Riesgos</h2>
+                <p class="mb-6">La implementación de la TD, aunque prometedora, enfrenta desafíos significativos y riesgos que pueden comprometer su éxito. Estos incluyen ciberseguridad, costos, integración tecnológica, incertidumbre y cumplimiento regulatorio.</p>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-red-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-red-700 mb-3">Vulnerabilidades de Ciberseguridad y Privacidad</h3>
+                        <p class="mb-2 text-sm">La expansión digital aumenta la exposición a ciberataques (hacking, malware, phishing), con posibles pérdidas financieras, daño reputacional y vulneración de datos.</p>
+                        <p class="mb-2 text-sm"><span class="font-semibold text-red-600">63%</span> de organizaciones globales consideran la ciberseguridad un mayor desafío en la digitalización.</p>
+                        <p class="text-xs text-slate-500 mt-3">Se necesitan estrategias como modelos Zero Trust y cumplimiento de normativas de protección de datos (GDPR, LGPD).</p>
+                    </div>
+                     <div class="bg-yellow-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-yellow-700 mb-3">Costos, Integración e Incertidumbre Tecnológica</h3>
+                        <p class="mb-2 text-sm">La TD exige inversiones considerables en infraestructura, software y capacitación/contratación de talento.</p>
+                        <p class="mb-1 text-sm font-medium text-yellow-600">Desafíos en Perú (PwC):</p>
+                        <ul class="list-disc list-inside ml-4 text-sm">
+                            <li>Infraestructura obsoleta: <span class="font-semibold">61%</span></li>
+                            <li>Falta de integración tecnológica: <span class="font-semibold">51%</span></li>
+                        </ul>
+                        <p class="text-xs text-slate-500 mt-3">La rápida evolución tecnológica genera incertidumbre sobre qué adoptar y cuándo, demandando agilidad de aprendizaje y adaptación.</p>
+                    </div>
+                </div>
+                 <div class="bg-slate-50 p-4 rounded-md">
+                    <h3 class="text-lg font-semibold mb-2 text-slate-700">Entorno Regulatorio</h3>
+                    <p class="mb-2 text-sm">Las regulaciones a menudo no siguen el ritmo del avance tecnológico, creando vacíos legales o ambigüedades. Es esencial alinear prácticas de TD con estándares internacionales y legislaciones locales.</p>
+                    <p class="text-sm font-medium text-teal-600">En Perú: Ley de Firmas Digitales y Ley de Protección de Datos Personales son claves.</p>
+                     <p class="text-xs text-slate-500 mt-2">Los desafíos de la TD (costos, resistencia, habilidades, seguridad, cumplimiento) están interconectados y requieren un enfoque holístico.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="sostenibilidad" class="content-section">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4 text-teal-600">Impacto en Sostenibilidad y Resiliencia</h2>
+                <p class="mb-6">La TD no solo optimiza la eficiencia, sino que impacta crecientemente la capacidad de operar sosteniblemente y fortalecer la resiliencia ante un entorno volátil.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-green-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-green-700 mb-3">Contribución a la Sostenibilidad (ODS)</h3>
+                        <p class="mb-2 text-sm">Las tecnologías digitales apoyan la consecución de los Objetivos de Desarrollo Sostenible (ODS). La "TI sostenible y ecológica" es una tendencia clave, impulsada por conciencia ambiental y beneficios como ahorro de costos y lealtad de marca.</p>
+                        <p class="mb-2 text-sm">Incluye optimización del uso de energía, software eficiente y migración a la nube para reducir huella de carbono.</p>
+                        <p class="text-xs text-slate-500 mt-3">IA y Big Data pueden facilitar la transición a energías verdes y economía circular.</p>
+                    </div>
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-3">Fortalecimiento de la Resiliencia Empresarial</h3>
+                        <p class="mb-2 text-sm">La TD mejora la resiliencia (capacidad de anticipar, prepararse, responder y adaptarse a disrupciones) al permitir respuestas ágiles y un equilibrio entre objetivos económicos y socio-ecológicos.</p>
+                        <p class="mb-2 text-sm">Optimiza la innovación y agilidad, mejorando la resiliencia organizacional. Big Data, nube e IA ayudan a identificar riesgos y optimizar recursos en crisis.</p>
+                        <p class="text-sm font-medium"><span class="font-bold text-blue-600">Más del 70%</span> de empresas afirman que la adopción de nuevas tecnologías ha mejorado su resiliencia.</p>
+                         <p class="text-xs text-slate-500 mt-3">Existe una sinergia: TD habilita sostenibilidad, y prácticas sostenibles fortalecen resiliencia.</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-md">
+                    <h3 class="text-lg font-semibold mb-2 text-slate-700">Medición del Impacto Global</h3>
+                    <p class="mb-2 text-sm">Es crucial medir el impacto de la TD más allá de lo financiero, incluyendo bienestar y sostenibilidad. KPIs deben cubrir eficiencia, productividad, CX, ingresos e innovación.</p>
+                    <p class="text-sm">La OCDE propone metodologías para medir efectos sobre bienestar social. Los sistemas de medición deben evolucionar para capturar estas nuevas dimensiones.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="conclusion" class="content-section">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4 text-teal-600">Conclusión: El Viaje Continuo de la Transformación</h2>
+                <p class="mb-4">La transformación digital es una fuerza motriz de cambio profundo y multifacético. Su impacto redefine operaciones, cultura, interacción con clientes, competencia, sostenibilidad y resiliencia. Presenta una dualidad: oportunidades significativas y desafíos considerables.</p>
+                <p class="mb-4">El impacto final no está predeterminado por la tecnología, sino por la interacción entre herramientas digitales, elecciones estratégicas, capacidad de ejecución y agilidad adaptativa de la organización. Factores como liderazgo visionario, cultura abierta al cambio y alineación estratégica son determinantes críticos.</p>
+                <p class="mb-4">La TD no es un proyecto con fin, sino un proceso de adaptación y reinvención continuo. Tendencias futuras como hiperautomatización, IA avanzada, XaaS y sostenibilidad como estándar seguirán moldeando su impacto.</p>
+                <p class="mb-4">A medida que la TD madura, el foco se desplazará de la eficiencia interna a la creación de valor externo mediante ecosistemas digitales, innovación abierta y co-creación con clientes y socios.</p>
+                <p class="mb-4">El éxito requiere un enfoque holístico, sistémico y adaptativo. La capacidad de adaptación continua, cultura de aprendizaje y liderazgo son cruciales. La TD evoluciona de iniciativa discreta a capacidad organizacional fundamental.</p>
+                <p class="font-semibold text-slate-700">Futuras líneas de investigación:</p>
+                <ul class="list-disc list-inside space-y-1 text-sm mt-2 mb-4 text-slate-600">
+                    <li>Impacto a largo plazo en la estructura del empleo y desigualdades.</li>
+                    <li>Marcos de medición más sofisticados (sostenibilidad, bienestar, resiliencia).</li>
+                    <li>Implicaciones éticas de tecnologías emergentes (IA, Big Data).</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-white text-center p-6 mt-12">
+        <p class="text-sm">&copy; 2024 Análisis Interactivo: Impacto de la Transformación Digital. Basado en el ensayo original.</p>
+    </footer>
+
+    <script>
+        const navButtons = document.querySelectorAll('.nav-button');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        function setActiveSection(targetId) {
+            navButtons.forEach(button => {
+                button.classList.toggle('active', button.dataset.target === targetId);
+            });
+            contentSections.forEach(section => {
+                section.classList.toggle('active', section.id === targetId);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                setActiveSection(button.dataset.target);
+            });
+        });
+
+        // Initialize with the "inicio" section
+        setActiveSection('inicio');
+        
+        // Chart.js configurations
+        // Function to wrap labels in Chart.js
+        function wrapLabels(label, maxWidth) {
+            const words = label.split(' ');
+            let line = '';
+            const lines = [];
+            for (let i = 0; i < words.length; i++) {
+                let testLine = line + words[i] + ' ';
+                if (testLine.length > maxWidth && i > 0) {
+                    lines.push(line.trim());
+                    line = words[i] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line.trim());
+            return lines;
+        }
+
+        // TD Market Growth Chart
+        const tdMarketCtx = document.getElementById('tdMarketChart')?.getContext('2d');
+        if (tdMarketCtx) {
+            new Chart(tdMarketCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2024', '2025', '2026', '2027', '2028', '2029'], // Simplified labels
+                    datasets: [{
+                        label: 'Mercado Global TD (Billones USD)',
+                        data: [1.70, 2.06, 2.50, 3.03, 3.68, 4.46], // Calculated based on 21.32% CAGR
+                        borderColor: '#0D9488', // teal-600
+                        backgroundColor: 'rgba(13, 148, 136, 0.1)', // teal-600 with opacity
+                        fill: true,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Billones USD' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: true, position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + ' Billones USD';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Restaurant Automation Chart
+        const restaurantAutomationCtx = document.getElementById('restaurantAutomationChart')?.getContext('2d');
+        if (restaurantAutomationCtx) {
+            new Chart(restaurantAutomationCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Automatización Implementada', 'No Implementada'],
+                    datasets: [{
+                        label: 'Automatización en Restaurantes',
+                        data: [65, 35],
+                        backgroundColor: ['#F59E0B', '#FDE68A'], // amber-500, amber-200
+                        borderColor: ['#D97706', '#FCD34D'], // amber-600, amber-300
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Barreras Humanas y Culturales en Perú Chart
+        const barrerasCtx = document.getElementById('barrerasPeruChart')?.getContext('2d');
+        if (barrerasCtx) {
+            new Chart(barrerasCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabels('Falta de Habilidades Digitales (PwC)', 15), 
+                        wrapLabels('Cultura Tradicional (PwC)', 15), 
+                        wrapLabels('Falta Personal Capacitado (EY)', 15), 
+                        wrapLabels('Competencias Digitales Insuficientes (EY)', 15)
+                    ],
+                    datasets: [{
+                        label: '% de Ejecutivos',
+                        data: [65, 65, 62, 65],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.6)', // red-500
+                            'rgba(244, 63, 94, 0.6)', // rose-500
+                            'rgba(236, 72, 153, 0.6)', // pink-500
+                            'rgba(217, 70, 239, 0.6)' // fuchsia-500
+                        ],
+                        borderColor: [
+                            'rgb(220, 38, 38)',
+                            'rgb(225, 29, 72)',
+                            'rgb(219, 39, 119)',
+                            'rgb(192, 38, 211)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: { display: true, text: '%' }
+                        },
+                        y: {
+                             ticks: {
+                                autoSkip: false // Ensures all wrapped labels are shown
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.x + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
